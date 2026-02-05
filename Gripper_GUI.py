@@ -1,3 +1,6 @@
+import matplotlib
+matplotlib.use("TkAgg")
+
 import customtkinter
 import platform
 import os
@@ -6,6 +9,7 @@ from tkinter.messagebox import showinfo
 from math import pi
 import time
 import threading
+
 from matplotlib.backends.backend_tkagg import (
     FigureCanvasTkAgg, NavigationToolbar2Tk)
 # Implement the default Matplotlib key bindings.
@@ -392,7 +396,8 @@ def GUI(var):
                     Motor1.Send_gripper_data_pack(Position_send,Speed_send,Current_send,Activate_send,Action_send,Estop_send,Release_dir_send) 
 
                 
-            message, UnpackedMessageID = Communication1.receive_can_messages(timeout=0.05) 
+            # message, UnpackedMessageID = Communication1.receive_can_messages(timeout=0.05) 
+            message, UnpackedMessageID = Communication1.receive_can_messages(timeout=0) # optimization: timeout=0
 
             if message is not None:
                 """
